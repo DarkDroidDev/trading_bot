@@ -1,0 +1,1 @@
+{"version":"0.0.1","name":"trading-bot-v2","dependencies":{"dotenv":{"version":"14.2.0"},"express":{"version":"4.17.2"},"mongoose":{"version":"6.1.8"},"node-binance-api":{"version":"0.13.1"},"node-emoji":{"version":"1.11.0"},"technicalindicators":{"version":"3.1.0"},"telegraf-session-mongodb":{"version":"2.0.2"},"telegraf":{"version":"4.6.0"}}}

@@ -1,0 +1,50 @@
+version: "3.3"
+
+services:
+  ########################################
+  ########### WEBSOCKET SERVER ##########
+  strategywss:
+    image: strategywss:0.1.214
+    container_name: strategywss
+    restart: always
+    network_mode: host
+    build:
+      context: .
+      dockerfile: Dockerfile.ws.strategy
+    command: npm run start:strategy:dev
+    ports:
+      - 8997:8997
+    env_file:
+      - .env.development
+    environment:
+      ENVNAME: development
+      NODE_ENV: development
+      LOG_LEVEL: DEBUG
+      TELEGRAM_BOT_TOKEN: 5282823110:AAFzyS92VOx29ImkHdREr9wvk9hUG6Eyn0c
+  ########################################
+  ########### HTTP SERVER e BOT ##########
+  bothttpserver:
+    image: strategywss:0.1.214
+    container_name: bothttpserver
+    restart: always
+    network_mode: host
+    env_file:
+      - .env.development
+    entrypoint: npm run start:server:dev
+    ports:
+      - 8085:8085
+      - 8499:8499
+      - 8989:8989
+    environment:
+      ENVNAME: development
+      NODE_ENV: development
+      LOG_LEVEL: DEBUG
+      DOCKER_RESTART_CONTAINER: strategywss;bothttpserver
+      DOCKER_RESTART_ENDPOINT: https://dashboard.blockchainera.eu/api
+      DOCKER_ENDPOINT_ID: 2
+      DOCKER_AUTH_USERNAME: admin-blockchainera-api
+      DOCKER_AUTH_PASSWORD: Uhd653402k3l_857432rmkf43
+      # token bot http://t.me/TradingBotDev3Bot
+      TELEGRAM_BOT_TOKEN: 5282823110:AAFzyS92VOx29ImkHdREr9wvk9hUG6Eyn0c
+    depends_on:
+      - strategywss

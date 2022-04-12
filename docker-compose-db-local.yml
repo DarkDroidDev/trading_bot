@@ -1,0 +1,43 @@
+version: "3.3"
+
+services:
+
+  ######################################
+  ######## DATABASE ###################
+  tradingbotdb:
+    image: mongo:4.4
+    container_name: tradingbotdb
+    restart: always
+    network_mode: bridge
+    command: --wiredTigerCacheSizeGB 1.5
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - MONGO_REPLICA_SET_MODE=primary
+      - MONGO_REPLICA_SET_KEY=JMaas875GGhtmlsht98765kj2098
+      - MONGO_INITDB_ROOT_USERNAME=mainadmin
+      - MONGO_INITDB_ROOT_PASSWORD=84htKKzzMhj7632023sdd
+      - MONGO_INITDB_DATABASE=tradingbotdb
+    volumes:
+      - ./mongo-init-local.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+    ports:
+      - 29226:27017
+  
+  ######################################
+  ######## EXPRESS ###################
+  tradingbotdbexp:
+    image: mongo-express
+    container_name: tradingbotdb-express
+    restart: always
+    network_mode: host
+    ports:
+      - 8189:8189
+    environment:
+      VCAP_APP_PORT: 8189
+      ME_CONFIG_BASICAUTH_USERNAME: admin-serv
+      ME_CONFIG_BASICAUTH_PASSWORD: asgard_Pow34Y65EE4132
+      ME_CONFIG_MONGODB_ADMINUSERNAME: mainadmin
+      ME_CONFIG_MONGODB_ADMINPASSWORD: 84htKKzzMhj7632023sdd
+      ME_CONFIG_MONGODB_URL: mongodb://mainadmin:84htKKzzMhj7632023sdd@localhost:29226/admin?useUnifiedTopology=true
+    depends_on:
+      - tradingbotdb

@@ -1,0 +1,48 @@
+version: "3.3"
+
+services:
+  ########################################
+  ########### WEBSOCKET SERVER ###########
+  strategywss:
+    image: strategywss:0.1.214
+    container_name: strategywss
+    restart: always
+    network_mode: host
+    build:
+      context: .
+      dockerfile: Dockerfile.ws.strategy
+    command: npm run start:strategy
+    ports:
+      - 8997:8997
+    env_file:
+      - .env.production
+    environment:
+      ENVNAME: production
+      NODE_ENV: production
+      LOG_LEVEL: INFO
+  ########################################
+  ########### HTTP SERVER e BOT ##########
+  bothttpserver:
+    image: strategywss:0.1.214
+    container_name: bothttpserver
+    restart: always
+    network_mode: host
+    env_file:
+      - .env.production
+    entrypoint: npm run start:server
+    ports:
+      - 8085:8085
+      - 8499:8499
+      - 8989:8989
+    environment:
+      ENVNAME: production
+      NODE_ENV: production
+      LOG_LEVEL: INFO
+      NODE_TLS_REJECT_UNAUTHORIZED: '0'
+      DOCKER_RESTART_CONTAINER: strategywss;bothttpserver
+      DOCKER_RESTART_ENDPOINT: https://46.101.127.112:9443/api
+      DOCKER_ENDPOINT_ID: 2
+      DOCKER_AUTH_USERNAME: tradingbot-api-mngt
+      DOCKER_AUTH_PASSWORD: Bat654Rfvc0098BBbbctrghs_333re
+    depends_on:
+      - strategywss

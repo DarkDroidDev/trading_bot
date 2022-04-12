@@ -1,0 +1,27 @@
+FROM node:16.14-alpine3.15 as base
+
+USER root
+
+ENV TZ=Europe/Rome 
+
+RUN apk add --no-cache tzdata
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+WORKDIR /app
+
+ADD package*.json /app/
+ADD middleware /app/middleware
+ADD models /app/models
+ADD modules /app/modules
+ADD repository /app/repository
+ADD repository /app/repository
+ADD views /app/views
+ADD strategy-ws-server.js /app/strategy-ws-server.js
+ADD http-server.js /app/http-server.js
+ADD .env.* /app/
+
+WORKDIR /app
+
+RUN npm install --silent
+
+ENTRYPOINT node strategy-ws-server.js

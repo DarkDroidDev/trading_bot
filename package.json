@@ -1,0 +1,58 @@
+{
+  "name": "trading-bot-v2",
+  "description": "Telegram binance bot tradinding",
+  "version": "0.1.214",
+  "main": "trading-bot.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "type": "module",
+  "scripts": {
+    "start": "NODE_ENV=production node trading-bot.js",
+    "start:strategy": "NODE_ENV=production node strategy-ws-server.js",
+    "start:strategy:dev": "NODE_ENV=development node strategy-ws-server.js",
+    "start:server": "NODE_ENV=production node http-server.js",
+    "start:server:dev": "NODE_ENV=development node http-server.js",
+    "start:strategy::win": "set \"NODE_ENV=local\" && node strategy-ws-server.js",
+    "startws:local": "NODE_ENV=local node strategy-ws-server.js",
+    "startws:prod": "NODE_ENV=production node strategy-ws-server.js",
+    "start:dev": "NODE_ENV=development node trading-bot.js"
+  },
+  "browser": {
+    "crypto": false
+  },
+  "dependencies": {
+    "axios": "^0.26.1",
+    "body-parser": "^1.19.1",
+    "compression": "^1.7.4",
+    "cors": "^2.8.5",
+    "dotenv": "^14.2.0",
+    "express": "^4.17.2",
+    "express-mongo-sanitize": "^2.2.0",
+    "helmet": "^5.0.2",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.1.8",
+    "node-binance-api": "^0.13.1",
+    "node-emoji": "^1.11.0",
+    "node-fetch": "^3.2.2",
+    "swagger-ui-express": "^4.3.0",
+    "technicalindicators": "^3.1.0",
+    "telegraf": "^4.6.0",
+    "telegraf-session-mongodb": "^2.0.2",
+    "telegram-keyboard": "^2.3.0",
+    "ws": "^8.4.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/lgls/trading-bot-v2.git"
+  },
+  "keywords": [],
+  "author": "BlockChainEra.eu",
+  "displayName": "Trading Bot V2",
+  "readme": "README.md",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/lgls/trading-bot-v2/issues"
+  },
+  "homepage": "https://gitlab.com/lgls/trading-bot-v2#readme"
+}
