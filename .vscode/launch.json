@@ -1,0 +1,57 @@
+{
+    // Usare IntelliSense per informazioni sui possibili attributi.
+    // Al passaggio del mouse vengono visualizzate le descrizioni degli attributi esistenti.
+    // Per altre informazioni, visitare: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "firefox",
+            "request": "launch",
+            "name": "Run Firefox Page",
+            "url":  "http://localhost:3000"
+        },
+        {
+            "name": "Run Chrome Page",
+            "request": "launch",
+            "type": "chrome",
+            "url": "http://localhost:3000"
+        },
+        
+        {
+            "type": "pwa-node",
+            "request": "launch",
+            "name": "Test single func",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "env": {
+                "NODE_ENV":"local"
+            },
+            "program": "test-worker/test-single.js"
+        },
+        {
+            "type": "pwa-node",
+            "request": "launch",
+            "name": "Strategy Bot Server",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "env": {
+                "NODE_ENV":"local"
+            },
+            "program": "strategy-ws-server.js"
+        },
+        {
+            "type": "pwa-node",
+            "request": "launch",
+            "name": "http server",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "env": {
+                "NODE_ENV":"local"
+            },
+            "program": "http-server.js"
+        },
+    ]
+}
